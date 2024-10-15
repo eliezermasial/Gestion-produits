@@ -31,6 +31,9 @@
                           <th class="text-center">
                             Date d'enregistrement
                           </th>
+                          <th class="text-center">
+                            Action
+                          </th>
                         </tr>
                       </thead>
                       @foreach ($produits as $index => $produit)
@@ -50,6 +53,23 @@
                           </td>
                           <td class="text-center">
                             {{$produit->created_at->format('d-m-Y')}}
+                          </td>
+                          <td>
+                            <div class="template-demo d-flex justify-content-center">
+                              <a href="{{ route('admin.produit.edit',$produit)}}" class="btn btn-dark p-1">Editer</a>
+                              <form class="btn p-0" action="{{ route('admin.produit.destroy',$produit->id)}}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit"  class="btn btn-danger p-1">Delete</button>
+                              </form>
+                              <!-- <button type="button" class="btn btn-primary">Primary</button>
+                              <button type="button" class="btn btn-secondary">Secondary</button>
+                              <button type="button" class="btn btn-success">Success</button>
+                              <button type="button" class="btn btn-warning">Warning</button>
+                              <button type="button" class="btn btn-info">Info</button>
+                              <button type="button" class="btn btn-light">Light</button>
+                              <button type="button" class="btn btn-link">Link</button> -->
+                            </div>
                           </td>
                         </tr>
                         

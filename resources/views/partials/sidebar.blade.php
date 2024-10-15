@@ -19,7 +19,7 @@
         </a>
         <div class="collapse mt-1" id="form-elements">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"><a class="nav-link" href="{{ route('admin.Dashbord.create')}}"> Enregistrer produit </a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('admin.produit.create')}}"> Enregistrer produit </a></li>
           </ul>
         </div>
       </li>
@@ -34,7 +34,7 @@
         </a>
         <div class="collapse mt-1" id="tables">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="{{route('admin.Dashbord.index')}}"> Tableau produits</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{route('admin.produit.index')}}"> Tableau produits</a></li>
           </ul>
         </div>
       </li>

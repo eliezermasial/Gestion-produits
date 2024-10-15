@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Produit;
-use Illuminate\Http\Request;
 use App\Contracts\InterfaceAdmin;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProduitRequest;
 
 class ProduitController extends Controller
 {
@@ -36,19 +36,14 @@ class ProduitController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, InterfaceAdmin $produitService)
+    public function store(ProduitRequest $request, InterfaceAdmin $produitService)
     {
-        $validateRequest = $request->validate([
-            'name' => 'required|string|max:20',
-            'description' => 'required|string|max:255',
-            'price' => 'required|string|max:255',
-        ]);
         
         
-        $produit = $produitService->create([
-            'name'=> $validateRequest['name'],
-            'description' => $validateRequest['description'],
-            'price' => $validateRequest['price']
+        $produitService->create([
+            'name'=> $request['name'],
+            'description' => $request['description'],
+            'price' => $request['price']
         ]);
 
         //$notification = implementation d'un message de notification
@@ -61,30 +56,41 @@ class ProduitController extends Controller
      */
     public function show(string $id)
     {
-        //
+       //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Produit $produit)
     {
-        //
+        return view('forms.formCreate', ['produit'=>$produit]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProduitRequest $request, string $id,  InterfaceAdmin $produitService)
     {
-        //
+        $data = [
+            'name'=>$request->name,
+            'price'=>$request->price,
+            'description'=>$request->description
+        ];
+
+        $produitService->update($id, $data);
+
+        
+        return redirect()->route('admin.produit.index')->with('success', 'Produit modifié avec succès');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, InterfaceAdmin $produitService)
     {
-        //
+        $produitService->delete($id);
+
+        return redirect()->route('admin.produit.index')->with('success', 'Produit supprimé avec succès');
     }
 }
