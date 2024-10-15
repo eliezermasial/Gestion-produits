@@ -8,12 +8,12 @@
         <p class="card-description">
           @yield('title')
         </p>
-        <form class="forms-sample" action="" method="">
+        <form class="forms-sample" action="{{ route('admin.Dashbord.store')}}" method="Post">
           @csrf
-
-          @include('shar.inputs', ['name' => 'nom'])
-          @include('shar.inputs', ['type' => 'number', 'name'=>'prix'])
-          @include('shar.inputs', ['class'=>'form-control','type'=>'textarea', 'name'=>'description'])
+          @include('shared.inputs', ['class'=>'form-control form-control-lg', 'name'=>'name','placeholder'=>'Username'])
+          
+          @include('shared.inputs', ['type' => 'number', 'name'=>'price'])
+          @include('shared.inputs', ['class'=>'form-control','type'=>'textarea', 'name'=>'description'])
 
           <button type="submit" class="btn btn-primary me-2">Submit</button>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Produit;
 use Illuminate\Http\Request;
+use App\Contracts\InterfaceAdmin;
 use App\Http\Controllers\Controller;
 
 class ProduitController extends Controller
@@ -13,7 +14,11 @@ class ProduitController extends Controller
      */
     public function index()
     {
-        return view('table.produits');
+        $produits = Produit::orderBy('created_at', 'asc')->get();
+        return view('table.produits', [
+            'produits'=>$produits,
+
+        ]);
     }
 
     /**
@@ -23,15 +28,32 @@ class ProduitController extends Controller
     {
         $produit = new Produit();
         
-        return view('forms.formCreate');
+        return view('forms.formCreate', [
+            'produit' => $produit
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, InterfaceAdmin $produitService)
     {
-        //
+        $validateRequest = $request->validate([
+            'name' => 'required|string|max:20',
+            'description' => 'required|string|max:255',
+            'price' => 'required|string|max:255',
+        ]);
+        
+        
+        $produit = $produitService->create([
+            'name'=> $validateRequest['name'],
+            'description' => $validateRequest['description'],
+            'price' => $validateRequest['price']
+        ]);
+
+        //$notification = implementation d'un message de notification
+
+        return redirect()->route('dashboard')->with('success', 'produit ajouté avec success');
     }
 
     /**

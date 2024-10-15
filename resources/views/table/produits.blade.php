@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'tableau de produits')
+@section('title', 'Tableau produits')
 @section('content')
     <!-- table -->
     <div class="main-panel">
@@ -16,110 +16,45 @@
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <th>
+                          <th class="text-center">
                             #
                           </th>
-                          <th>
-                            First name
+                          <th class="text-center">
+                            nom de produit
                           </th>
-                          <th>
-                            Product
+                          <th class="text-center">
+                            description de produit
                           </th>
-                          <th>
-                            Amount
+                          <th class="text-center">
+                            prix
                           </th>
-                          <th>
-                            Deadline
+                          <th class="text-center">
+                            Date d'enregistrement
                           </th>
                         </tr>
                       </thead>
+                      @foreach ($produits as $index => $produit)
                       <tbody>
-                        <tr class="table-info">
-                          <td>
-                            1
+                        <tr class="{{ $index % 2 == 0 ? 'table-info' : 'table-success'}}">
+                          <td class="text-center">
+                            {{$produit->id}}
                           </td>
-                          <td>
-                            Herman Beck
+                          <td class="text-center">
+                            {{$produit->name}}
                           </td>
-                          <td>
-                            Photoshop
+                          <td class="text-center">
+                            {{$produit->description}}
                           </td>
-                          <td>
-                            $ 77.99
+                          <td class="text-center">
+                            {{$produit->price}}
                           </td>
-                          <td>
-                            May 15, 2015
-                          </td>
-                        </tr>
-                        <tr class="table-warning">
-                          <td>
-                            2
-                          </td>
-                          <td>
-                            Messsy Adam
-                          </td>
-                          <td>
-                            Flash
-                          </td>
-                          <td>
-                            $245.30
-                          </td>
-                          <td>
-                            July 1, 2015
+                          <td class="text-center">
+                            {{$produit->created_at->format('d-m-Y')}}
                           </td>
                         </tr>
-                        <tr class="table-danger">
-                          <td>
-                            3
-                          </td>
-                          <td>
-                            John Richards
-                          </td>
-                          <td>
-                            Premeire
-                          </td>
-                          <td>
-                            $138.00
-                          </td>
-                          <td>
-                            Apr 12, 2015
-                          </td>
-                        </tr>
-                        <tr class="table-success">
-                          <td>
-                            4
-                          </td>
-                          <td>
-                            Peter Meggik
-                          </td>
-                          <td>
-                            After effects
-                          </td>
-                          <td>
-                            $ 77.99
-                          </td>
-                          <td>
-                            May 15, 2015
-                          </td>
-                        </tr>
-                        <tr class="table-primary">
-                          <td>
-                            5
-                          </td>
-                          <td>
-                            Edward
-                          </td>
-                          <td>
-                            Illustrator
-                          </td>
-                          <td>
-                            $ 160.25
-                          </td>
-                          <td>
-                            May 03, 2015
-                          </td>
-                        </tr>
+                        
                       </tbody>
+                      @endforeach
                     </table>
                   </div>
                 </div>

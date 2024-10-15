@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard.index');
-})->name('dashbord');
+})->name('dashboard');
 
 Route::prefix('/admin')->name('admin.')->group(function () {
     Route::resource('Dashbord', \App\Http\Controllers\Admin\ProduitController::class);
