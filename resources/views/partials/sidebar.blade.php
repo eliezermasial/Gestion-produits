@@ -19,7 +19,14 @@
         </a>
         <div class="collapse mt-1" id="form-elements">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"><a class="nav-link" href="{{ route('admin.produit.create')}}"> Enregistrer produit </a></li>
+            @if (Route::currentRouteName() === 'admin.produit.edit')
+              
+              <li class="nav-item"><a class="nav-link" href="{{ route('admin.produit.create')}}"> modifier produit </a></li>
+              
+              @else
+
+              <li class="nav-item"><a class="nav-link" href="{{ route('admin.produit.create')}}"> Enregistrer produit  </a></li>
+            @endif
           </ul>
         </div>
       </li>
@@ -49,7 +56,7 @@
         </a>
         <div class="collapse mt-1" id="auth">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('login')}}"> Login </a></li>
           </ul>
         </div>
       </li>
