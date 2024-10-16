@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class AuthController extends Controller
         {
             $request->session()->regenerate();
 
-            return redirect()->route('dashboard');
+            return redirect($request->session()->get('url.intended', route('dashboard')));
         }
        
         return to_route('login')->withErrors([

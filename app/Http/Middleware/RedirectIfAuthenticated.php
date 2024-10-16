@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
 use Symfony\Component\HttpFoundation\Response;
 
 class RedirectIfAuthenticated
@@ -21,8 +21,14 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                return redirect()->route('dashboard')->with('success', 'Vous êtes déjà connecté.');
             }
+        }
+
+        //sauvegardage de l'url precedent
+        if($request->method() == 'Get' && !str_contains($request->path(),'login'))
+        {
+            $request->session()->put('url.intended', url('previous'));
         }
 
         return $next($request);
