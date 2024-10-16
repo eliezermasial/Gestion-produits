@@ -18,5 +18,5 @@ Route::get('/', function () {
 })->name('dashboard');
 
 Route::prefix('/admin')->name('admin.')->group(function () {
-    Route::resource('/produit', \App\Http\Controllers\Admin\ProduitController::class);
+    Route::resource('/produit', \App\Http\Controllers\Admin\ProduitController::class)->except('show');
 });
