@@ -57,22 +57,14 @@
                           <td>
                             <div class="template-demo d-flex justify-content-center">
                               <a href="{{ route('admin.produit.edit',$produit)}}" class="btn btn-dark p-1">Editer</a>
-                              <form class="btn p-0" action="{{ route('admin.produit.destroy',$produit->id)}}" method="POST">
+                              <form id="deleteForm-{{ $produit->id }}" onsubmit="confirmDelete(event, {{ $produit->id }})" class="btn p-0" action="{{ route('admin.produit.destroy', $produit->id)}}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="submit"  class="btn btn-danger p-1">Delete</button>
+                                <button  type="submit"  class="btn btn-danger p-1">Delete</button>
                               </form>
-                              <!-- <button type="button" class="btn btn-primary">Primary</button>
-                              <button type="button" class="btn btn-secondary">Secondary</button>
-                              <button type="button" class="btn btn-success">Success</button>
-                              <button type="button" class="btn btn-warning">Warning</button>
-                              <button type="button" class="btn btn-info">Info</button>
-                              <button type="button" class="btn btn-light">Light</button>
-                              <button type="button" class="btn btn-link">Link</button> -->
                             </div>
                           </td>
                         </tr>
-                        
                       </tbody>
                       @endforeach
                     </table>

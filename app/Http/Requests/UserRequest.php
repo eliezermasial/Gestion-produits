@@ -23,6 +23,7 @@ class UserRequest extends FormRequest
     {
         return [
             'password' => 'required|min:5',
+            'image' => ['image', 'max:2000'],
             'email' => 'required|email|max:30',
         ];
     }
