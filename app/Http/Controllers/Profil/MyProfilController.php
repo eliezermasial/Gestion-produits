@@ -12,7 +12,9 @@ class MyProfilController extends Controller
 {
     public function edit ()
     {
-        return view('profil.myProfil');
+        $images = storage::disk('public')->files('blog');
+        
+        return view('profil.myProfil', ['images'=>$images]);
     }
 
     public function update(Request $request)
@@ -28,12 +30,6 @@ class MyProfilController extends Controller
 
             $user = Auth:: user ();
 
-            // Si user a deja l'image, la supprimer
-            if($user->image)
-            {
-                Storage::disk('public')->delete($user->image); // suppression de l'image apres la verification
-            }
-
             // mettre à jour l'image
             $user->image = $imagePath;
             $user->save();
@@ -47,4 +43,35 @@ class MyProfilController extends Controller
         
     }
     //
+
+    public function delete (Request $request)
+    {
+        $request->image;
+        
+        $user = Auth::user();
+        $images = storage::disk('public')->files('blog');
+
+        if ($request->image == $user->image)
+        {
+            storage::disk('public')->delete($user->image);
+
+            $user->save();
+
+            return redirect()->route('profil.edit')->with('success', 'vous avez supprimé votre profil success');
+        }
+        else
+        {
+            foreach ($images as $image)
+            {
+                if ($request->image == $image)
+                {
+                    storage::disk('public')->delete($image);
+
+                    return redirect()->route('profil.edit')->with('success', 'image supprimée avec success');
+                }
+            }
+        }
+
+        return redirect()->back()->withErrors(['image'=>'non supprimé']);
+    }
 }

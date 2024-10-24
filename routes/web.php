@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard.index');
-})->name('dashboard');
+})->name('dashboard')->middleware('auth');
 
 // Ces routes gerent l'authentification de l'application
 Route::delete('/login', [\App\Http\Controllers\Auth\AuthController::class, 'logout'])->name('logout');
@@ -25,15 +25,15 @@ Route::get('/login', [\App\Http\Controllers\Auth\AuthController::class, 'login']
 // Ces routes gerent la partie profil de l'utilisateur
 Route::get('/profil', [\App\Http\Controllers\Profil\MyProfilController::class, 'edit'])->name('profil.edit')->middleware('auth');
 Route::put('/profil', [\App\Http\Controllers\Profil\MyProfilController::class, 'update'])->name('profil.update');
+Route::delete('/profil', [\App\Http\Controllers\Profil\MyProfilController::class, 'delete'])->name('profil.delete');
 
 // Ces routes gereent la gestion de l'application
 Route::prefix('/admin')->name('admin.')->group(function () {
 
     //Application de middleware pour la protection des routes create, edit et delete
-    Route::resource('/produit', \App\Http\Controllers\Admin\ProduitController::class)->except('show')->
-    middleware('auth')->only(['create','edit','delete']);
+    Route::resource('/produit', \App\Http\Controllers\Admin\ProduitController::class)->except('show')->middleware('auth');
 
     // Les autres routes de resource ne seront pas affectées par le middleware
-    Route::resource('/produit', \App\Http\Controllers\Admin\ProduitController::class)->except('show','edit','create','delete');
+    //Route::resource('/produit', \App\Http\Controllers\Admin\ProduitController::class)->except('show','index');
 
 });

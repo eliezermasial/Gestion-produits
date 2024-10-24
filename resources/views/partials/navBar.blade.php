@@ -162,9 +162,12 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
             <div class="dropdown-header text-center">
-              <img class="img-md rounded-circle" src="{{ url('images/faces/face8.jpg')}}" alt="Profile image">
-              <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
-              <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
+              @auth
+              <img class="img-xs rounded-circle" src="/storage/{{ \Illuminate\Support\Facades\Auth::user()->image }}" alt="Profile image">
+              <p class="mb-1 mt-3 font-weight-semibold"> {{\Illuminate\Support\Facades\Auth::user()->name}} </p>
+              <p class="fw-light text-muted mb-0"> {{\Illuminate\Support\Facades\Auth::user()->email}} </p>
+              @endauth
+              
             </div>
             <a class="dropdown-item" href="{{ route('profil.edit')}}"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
             <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
