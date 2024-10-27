@@ -50,23 +50,24 @@
             </div>
         </div>
         <div class="col-6">
+
             <h2 class="mb-4">My Album</h2>
             <div class="d-flex flex-wrap">
                 @foreach ($images as $image)
-            <div class="form-group mt-3">
-                <img src="/storage/{{$image}}" alt="Profile Picture" width="150" class="img-thumbnail mb-3">
-                @if ($image)
-                <form action="{{ route('profil.delete')}}" method="post">
-                    @csrf
-                    @method('delete')
+                <div class="form-group mt-3">
+                    <img src="/storage/{{$image}}" alt="Profile Picture" width="150" class="img-thumbnail mb-3">
+                    @if ($image)
+                    <form action="{{ route('profil.delete')}}" method="post">
+                        @csrf
+                        @method('delete')
 
-                    <input type="hidden" name="image" value="{{$image}}">
+                        <input type="hidden" name="image" value="{{$image}}">
                     
-                    <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cette image ?')" class="btn btn-danger">Supprimer</button>
-                </form>
-                @endif
-            </div>
-            @endforeach
+                        <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cette image ?')" class="btn btn-danger">Supprimer</button>
+                    </form>
+                    @endif
+                </div>
+                @endforeach
             </div>
             
         </div>

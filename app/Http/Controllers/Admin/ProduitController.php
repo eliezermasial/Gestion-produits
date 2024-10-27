@@ -15,10 +15,8 @@ class ProduitController extends Controller
     public function index()
     {
         $produits = Produit::orderBy('created_at', 'asc')->get();
-        return view('table.produits', [
-            'produits'=>$produits,
-
-        ]);
+        
+        return view('table.produits',['produits'=>$produits,]);
     }
 
     /**
@@ -38,12 +36,11 @@ class ProduitController extends Controller
      */
     public function store(ProduitRequest $request, InterfaceAdmin $produitService)
     {
-        
-        
         $produitService->create([
             'name'=> $request['name'],
+            'price' => $request['price'],
+            'category' => $request['category'],
             'description' => $request['description'],
-            'price' => $request['price']
         ]);
 
         //$notification = implementation d'un message de notification
@@ -75,12 +72,12 @@ class ProduitController extends Controller
         $data = [
             'name'=>$request->name,
             'price'=>$request->price,
+            'category'=>$request->category,
             'description'=>$request->description
         ];
 
         $produitService->update($id, $data);
 
-        
         return redirect()->route('admin.produit.index')->with('success', 'Produit modifié avec succès');
     }
 

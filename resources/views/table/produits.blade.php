@@ -22,11 +22,14 @@
                           <th class="text-center">
                             nom de produit
                           </th>
-                          <th class="text-center">
-                            description de produit
+                          <th>
+                            category
                           </th>
                           <th class="text-center">
                             prix
+                          </th>
+                          <th class="text-center">
+                            description de produit
                           </th>
                           <th class="text-center">
                             Date d'enregistrement
@@ -43,13 +46,16 @@
                             {{$produit->id}}
                           </td>
                           <td class="text-center">
+                            {{$produit->category}}
+                          </td>
+                          <td class="text-center">
                             {{$produit->name}}
                           </td>
                           <td class="text-center">
-                            {{$produit->description}}
-                          </td>
-                          <td class="text-center">
                             {{$produit->price}}
+                          </td>
+                          <td style="white-space: pre-line;">
+                            {{$produit->description}}
                           </td>
                           <td class="text-center">
                             {{$produit->created_at->format('d-m-Y')}}

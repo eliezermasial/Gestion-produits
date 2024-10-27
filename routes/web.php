@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Requests\ProduitRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function () {    
     return view('dashboard.index');
 })->name('dashboard')->middleware('auth');
 
@@ -26,6 +27,9 @@ Route::get('/login', [\App\Http\Controllers\Auth\AuthController::class, 'login']
 Route::get('/profil', [\App\Http\Controllers\Profil\MyProfilController::class, 'edit'])->name('profil.edit')->middleware('auth');
 Route::put('/profil', [\App\Http\Controllers\Profil\MyProfilController::class, 'update'])->name('profil.update');
 Route::delete('/profil', [\App\Http\Controllers\Profil\MyProfilController::class, 'delete'])->name('profil.delete');
+
+//gerer le systeme de filtrage
+//Route::post('/produit',[\App\Http\Controllers\Admin\ProduitController::class, 'listins'])->name('produit.listin');
 
 // Ces routes gereent la gestion de l'application
 Route::prefix('/admin')->name('admin.')->group(function () {

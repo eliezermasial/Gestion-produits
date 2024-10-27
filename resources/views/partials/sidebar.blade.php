@@ -32,6 +32,21 @@
       </li>
 
       <!-- tables de produits -->
+      <li class="nav-item nav-category">Search</li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+          <i class="menu-icon mdi mdi-table"></i>
+          <span class="menu-title">Search by Category</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse mt-1" id="tables">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{route('admin.produit.index')}}"> Tableau produits</a></li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- tables de produits -->
       <li class="nav-item nav-category">Table</li>
       <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">

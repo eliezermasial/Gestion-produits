@@ -34,45 +34,26 @@
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item dropdown d-none d-lg-block">
-          <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a>
-          <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-            <a class="dropdown-item py-3" >
-              <p class="mb-0 font-weight-medium float-left">Select category</p>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item preview-item">
-              <div class="preview-item-content flex-grow py-2">
-                <p class="preview-subject ellipsis font-weight-medium text-dark">Bootstrap Bundle </p>
-                <p class="fw-light small-text mb-0">This is a Bundle featuring 16 unique dashboards</p>
-              </div>
-            </a>
-            <a class="dropdown-item preview-item">
-              <div class="preview-item-content flex-grow py-2">
-                <p class="preview-subject ellipsis font-weight-medium text-dark">Angular Bundle</p>
-                <p class="fw-light small-text mb-0">Everything you’ll ever need for your Angular projects</p>
-              </div>
-            </a>
-            <a class="dropdown-item preview-item">
-              <div class="preview-item-content flex-grow py-2">
-                <p class="preview-subject ellipsis font-weight-medium text-dark">VUE Bundle</p>
-                <p class="fw-light small-text mb-0">Bundle of 6 Premium Vue Admin Dashboard</p>
-              </div>
-            </a>
-            <a class="dropdown-item preview-item">
-              <div class="preview-item-content flex-grow py-2">
-                <p class="preview-subject ellipsis font-weight-medium text-dark">React Bundle</p>
-                <p class="fw-light small-text mb-0">Bundle of 8 Premium React Admin Dashboard</p>
-              </div>
-            </a>
+        @if (Route::currentRouteName() == 'dashboard')
+        <form class="search-form d-flex justify-content-around" action="" method="Get">
+          @csrf
+          <div class="nav-item dropdown d-none d-lg-block">     
+            <select name="category" id="" class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split">
+              <option >Select Category</option>
+              <option  value="Légumineuses">Légumineuses</option>
+              <option value="Fruits">Fruits</option>
+              <option  value="Légumes">Légumes</option>
+              <option  value="Viandes">Viandes</option>
+              <option  value="Céréales">Céréales</option>
+            </select>
           </div>
-        </li>
-        <li class="nav-item">
-          <form class="search-form" action="#">
+          <div class="search-form">
+            <button type="submit" class="btn text-center p-2" style="border: none">
             <i class="icon-search"></i>
-            <input type="search" class="form-control" placeholder="Search Here" title="Search here">
-          </form>
-        </li>
+            </button>
+          </div>
+        </form>
+        @endif
         <li class="nav-item dropdown">
           <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
             <i class="icon-mail icon-lg"></i>

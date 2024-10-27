@@ -13,6 +13,7 @@
           @method($produit->exists ? 'PUT' : 'POST')
 
           @include('shared.inputs', ['class'=>'form-control form-control-lg', 'name'=>'name', 'value' => $produit->exists ? $produit->name : '', 'placeholder'=>'nom du produit'])
+          @include('shared.inputs', ['class'=>'form-control form-control-lg', 'name'=>'category', 'value' => $produit->exists ? $produit->category : '', 'placeholder'=>'category du produit'])
           @include('shared.inputs', ['type' => 'number', 'class'=>'form-control form-control-lg', 'name'=>'price', 'value' => $produit->exists ? $produit->price : '', 'placeholder'=>'prix du produit'])
           @include('shared.inputs', ['class'=>'form-control','type'=>'textarea', 'name'=>'description'])
 
