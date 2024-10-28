@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Produit;
+use Illuminate\Http\Request;
 use App\Contracts\InterfaceAdmin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProduitRequest;
@@ -79,6 +80,24 @@ class ProduitController extends Controller
         $produitService->update($id, $data);
 
         return redirect()->route('admin.produit.index')->with('success', 'Produit modifié avec succès');
+    }
+
+    public function listing (Request $request)
+    {
+        $produits = [];
+
+        if ($request->has('category'))
+        {
+            $validateRequest = $request->validate(['category'=>'required|string|min:5']);
+
+            $query = Produit::query();
+            $query->where('category', 'like', '%' . $request->category . '%');//l'element like joue le role d'egale(=) pour comparer la requette 
+            $produits = $query->get();
+            
+            return view('search.searchByCategory', ['produits'=>$produits, 'validated'=>$validateRequest['category']]);
+        }
+        
+        return view('search.searchByCategory', ['produits'=>$produits]);
     }
 
     /**

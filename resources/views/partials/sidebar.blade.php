@@ -1,5 +1,5 @@
 <!-- partial:partials/_sidebar.html -->
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
+<nav class="sidebar sidebar-offcanvas pe-lg-2" id="sidebar">
     <ul class="nav">
 
       <!-- Dashboard -->
@@ -8,6 +8,21 @@
           <i class="mdi mdi-grid-large menu-icon"></i>
           <span class="menu-title">Dashboard</span>
         </a>
+      </li>
+
+      <!-- tables de produits -->
+      <li class="nav-item nav-category">Search</li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+          <i class="menu-icon mdi mdi-magnify"></i>
+          <span class="menu-title">Search</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse mt-1" id="tables">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{route('admin.produit.listing')}}"> Search by Category</a></li>
+          </ul>
+        </div>
       </li>
       
       <!-- formulaire -->
@@ -27,21 +42,6 @@
 
               <li class="nav-item"><a class="nav-link" href="{{ route('admin.produit.create')}}"> Enregistrer produit  </a></li>
             @endif
-          </ul>
-        </div>
-      </li>
-
-      <!-- tables de produits -->
-      <li class="nav-item nav-category">Search</li>
-      <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-          <i class="menu-icon mdi mdi-table"></i>
-          <span class="menu-title">Search by Category</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse mt-1" id="tables">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="{{route('admin.produit.index')}}"> Tableau produits</a></li>
           </ul>
         </div>
       </li>

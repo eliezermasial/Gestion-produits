@@ -29,7 +29,7 @@ Route::put('/profil', [\App\Http\Controllers\Profil\MyProfilController::class, '
 Route::delete('/profil', [\App\Http\Controllers\Profil\MyProfilController::class, 'delete'])->name('profil.delete');
 
 //gerer le systeme de filtrage
-//Route::post('/produit',[\App\Http\Controllers\Admin\ProduitController::class, 'listins'])->name('produit.listin');
+Route::get('/produit', [\App\Http\Controllers\Admin\ProduitController::class, 'listing'])->name('admin.produit.listing');
 
 // Ces routes gereent la gestion de l'application
 Route::prefix('/admin')->name('admin.')->group(function () {

@@ -34,6 +34,10 @@
         <input type="password" class="form-control form-control-lg @error($name) is-invalid @enderror"
             name="{{$name}}" id="{{$name}}" placeholder="{{$name}}">
 
+    @elseif ($type == 'search')
+
+        <input type="search" class="form-control w-50 @error($name) is-invalid @enderror" name="{{$name}}" id="{{$name}}" placeholder="{{$name}}">
+
     @else
         <input class="form-control @error($name) is-invalid @enderror" type="{{$type}}" 
         name="{{$name}}" id="{{$name}}" value="{{ old($name,$value)}}" placeholder="{{$name}}">
