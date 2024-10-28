@@ -14,7 +14,7 @@
                         </button>
                     </form>
                 </div>
-                <div class="col-12 d-flex justify-content-around pt-5">
+                <div class="col-12 d-flex flex-wrapp justify-content-around pt-5">
                 @foreach ($produits as $produit)
                 
                     <div class="card" style="width: 18rem;">

@@ -52,12 +52,14 @@
         <div class="col-6">
 
             <h2 class="mb-4">My Album</h2>
-            <div class="d-flex flex-wrap">
+            <div class="d-flex justify-content-around flex-wrap">
                 @foreach ($images as $image)
-                <div class="form-group mt-3">
-                    <img src="/storage/{{$image}}" alt="Profile Picture" width="150" class="img-thumbnail mb-3">
-                    @if ($image)
-                    <form action="{{ route('profil.delete')}}" method="post">
+                <div class="mt-1">
+                    <img src="/storage/{{$image}}" alt="Profile Picture" width="150" class="img-thumbnail h-50">
+                    <div class="card-body text-center">
+                        <p class="card-text"></p>
+                        @if ($image)
+                        <form action="{{ route('profil.delete')}}" method="post">
                         @csrf
                         @method('delete')
 
@@ -66,8 +68,11 @@
                         <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cette image ?')" class="btn btn-danger">Supprimer</button>
                     </form>
                     @endif
+                    </div>
+                    
                 </div>
                 @endforeach
+                
             </div>
             
         </div>
