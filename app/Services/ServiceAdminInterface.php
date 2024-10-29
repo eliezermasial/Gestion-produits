@@ -21,6 +21,14 @@ class ServiceAdminInterface implements InterfaceAdmin
         return $produit;
     }
 
+    public function searchProduit ($request)
+    {
+        $query = Produit::query();
+        $query->where('category', 'like', '%' . $request->category . '%');//l'element like joue le role d'egale(=) pour comparer la requette
+        
+        return $query->get();
+    }
+
     public function delete (int $id)
     {
         $produit = Produit::findOrFail($id);

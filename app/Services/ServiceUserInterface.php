@@ -3,7 +3,6 @@ namespace App\Services;
 
 use App\Contracts\InterfaceUser;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
 
 class ServiceUserInterface implements InterfaceUser
@@ -75,7 +74,7 @@ class ServiceUserInterface implements InterfaceUser
         if ($request->image == $user->image)
         {
             storage::disk('public')->delete($user->image);
-
+            $user->image = null;
             $user->save();
 
             return redirect()->route('profil.edit')->with('success', 'vous avez supprimé votre profil success');

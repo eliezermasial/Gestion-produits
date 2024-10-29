@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Produit;
 use Illuminate\Http\Request;
-use App\Contracts\InterfaceAdmin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProduitRequest;
+use App\Services\ServiceAdminInterface;
 
 class ProduitController extends Controller
 {
@@ -35,7 +35,7 @@ class ProduitController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProduitRequest $request, InterfaceAdmin $produitService)
+    public function store(ProduitRequest $request, ServiceAdminInterface $produitService)
     {
         $produitService->create([
             'name'=> $request['name'],
@@ -50,14 +50,6 @@ class ProduitController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-       //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Produit $produit)
@@ -68,7 +60,7 @@ class ProduitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProduitRequest $request, string $id,  InterfaceAdmin $produitService)
+    public function update(ProduitRequest $request, string $id,  ServiceAdminInterface $produitService)
     {
         $data = [
             'name'=>$request->name,
@@ -82,18 +74,16 @@ class ProduitController extends Controller
         return redirect()->route('admin.produit.index')->with('success', 'Produit modifié avec succès');
     }
 
-    public function listing (Request $request)
+    public function listing (Request $request, ServiceAdminInterface $produitService)
     {
         $produits = [];
-
+        
         if ($request->has('category'))
         {
             $validateRequest = $request->validate(['category'=>'required|string|min:5']);
-
-            $query = Produit::query();
-            $query->where('category', 'like', '%' . $request->category . '%');//l'element like joue le role d'egale(=) pour comparer la requette 
-            $produits = $query->get();
             
+            $produits = $produitService->searchProduit($request);
+
             return view('search.searchByCategory', ['produits'=>$produits, 'validated'=>$validateRequest['category']]);
         }
         
@@ -103,7 +93,7 @@ class ProduitController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id, InterfaceAdmin $produitService)
+    public function destroy(string $id, ServiceAdminInterface $produitService)
     {
         $produitService->delete($id);
 
