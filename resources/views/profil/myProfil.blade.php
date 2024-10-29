@@ -34,6 +34,7 @@
                 <p>Current Profile Picture:</p>
                 @auth
                 <img src="/storage/{{\Illuminate\Support\Facades\Auth::user()->image}}" alt="Profile Picture" width="150" class="img-thumbnail mb-3">
+                <p class="card-text pt-0"> {{\Illuminate\Support\Facades\auth::user()->updated_at}} </p>
                 @if (\Illuminate\Support\Facades\auth::user()->image)
                 <form action="{{ route('profil.delete')}}" method="post">
                     @csrf
@@ -57,7 +58,7 @@
                 <div class="mt-1">
                     <img src="/storage/{{$image}}" alt="Profile Picture" width="150" class="img-thumbnail h-50">
                     <div class="card-body text-center">
-                        <p class="card-text"></p>
+                        
                         @if ($image)
                         <form action="{{ route('profil.delete')}}" method="post">
                         @csrf

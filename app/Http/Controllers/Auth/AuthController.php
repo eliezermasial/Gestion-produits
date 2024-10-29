@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Services\ServiceUserInterface;
 
 class AuthController extends Controller
 {
@@ -14,25 +13,22 @@ class AuthController extends Controller
         return view('connexion.login');
     }
 
-    public function dologin (UserRequest $request)
+    public function dologin (UserRequest $request, ServiceUserInterface $serviceDologin)
     {
+        
         $validateRequest = $request->validated();
-        if(Auth::attempt($validateRequest))
-        {
-            $request->session()->regenerate();
 
-            return redirect($request->session()->get('url.intended', route('dashboard')));
-        }
+        $serviceDologin->dologinUser($validateRequest, $request);
        
         return to_route('login')->withErrors([
             'email'=>'email non valide', 'password'=>'password non valide'
         ]);
     }
 
-    public function logout ()
+    public function logout (ServiceUserInterface $serviceLogout)
     {
-        auth::logout();
-
+        $serviceLogout->logoutUser();
+        
         return to_route('dashboard')->with('success', 'vous n\'est plus connecté');
     }
 }

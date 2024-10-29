@@ -164,9 +164,6 @@
                 </button>
               </form>
             @endauth
-            @guest
-              <a class="dropdown-item" href="{{ route('logout')}}"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i> Connexion</a>
-            @endguest
           </div>
         </li>
       </ul>
